@@ -1,6 +1,7 @@
 package folhapagamento;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Empregado implements Serializable {
     
@@ -52,8 +53,21 @@ public class Empregado implements Serializable {
         this.fator = fator;
     }
     
-    public String getDados(){
-        return "Nome: "+this.nome+"\nCPF: "+this.cpf+"\nRG: "+this.rg+"\nData de admissao: "+this.dataadmissao+"\nFuncao: "+this.funcao+"\nSalario base: "+this.salariobase+"\nDependentes: "+this.dependentes;
+    /*protected String nome,cpf,rg,dataadmissao,cargo,funcao;
+    protected float salariobase;
+    protected int dependentes;*/
+    
+    public String[] getDados(){
+        String []info=new String[8];
+        info[0]=this.nome;
+        info[1]=this.cpf;
+        info[2]=this.rg;
+        info[3]=this.dataadmissao;
+        info[4]=this.cargo;
+        info[5]=this.funcao;
+        info[6]=String.valueOf(this.salariobase);
+        info[7]=String.valueOf(this.dependentes);
+        return info;
     }
     
     //Metodo padrao de calculo de ganhos

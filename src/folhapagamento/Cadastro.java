@@ -232,6 +232,7 @@ public class Cadastro extends javax.swing.JFrame {
             aux.vendedor=new Vendedor();
             aux.porpeca=new PorPeca();
             aux.porhora=new PorHora();
+            this.setVisible(false);
         }
         else JOptionPane.showMessageDialog(null, "Faltam informações");
     }//GEN-LAST:event_bCadastrarActionPerformed

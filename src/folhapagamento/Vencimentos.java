@@ -228,7 +228,6 @@ public class Vencimentos extends javax.swing.JFrame {
         float auxganho=0;
         if(Integer.parseInt(tID.getText())>=0){
             int auxcargo=Main.ids.get(Integer.parseInt(tID.getText())).cargo;
-            System.err.println(Integer.parseInt(tID.getText()));
             if(Float.parseFloat(tSalario.getText())>0){
                 switch(auxcargo){
                     case 1:

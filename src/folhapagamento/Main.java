@@ -74,6 +74,7 @@ public class Main implements Serializable {
             oos.flush();
             oos.close();
             fout.close();
+            System.err.println("gravação de ids");
         }catch (Exception ex){
             System.err.println("erro na gravação de ids");
         }
@@ -86,6 +87,7 @@ public class Main implements Serializable {
             oos.flush();
             oos.close();
             fout.close();
+            System.err.println("gravação de qtd");
         }catch (Exception ex){
             System.err.println("erro na gravação de qtd");
         }

@@ -5,7 +5,6 @@
  */
 package folhapagamento;
 
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -134,28 +133,194 @@ public class Painel extends javax.swing.JFrame {
         venc.setVisible(true);
     }//GEN-LAST:event_bCadastraVencimentosActionPerformed
 
+    /*info[0]=this.nome;
+    info[1]=this.cpf;
+    info[2]=this.rg;
+    info[3]=this.dataadmissao;
+    info[4]=this.cargo;
+    info[5]=this.funcao;
+    info[6]=String.valueOf(this.salariobase);
+    info[7]=String.valueOf(this.dependentes);*/
+    
     private void bGerarFolhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGerarFolhaActionPerformed
         // TODO add your handling code here:
+        //JOptionPane.showMessageDialog(null, Main.ids.get(qual).porhora.getDados()+"\nCargo: Ganha por hora", "Dados", 1);
+        int qual=Integer.parseInt(JOptionPane.showInputDialog("Digite o id do funcionario"));
+        //System.err.println(qual);
+        if(qual>=0 && Main.qtd>0){
+            int auxcargo=Main.ids.get(qual).cargo;
+            switch(auxcargo){
+                case 1://chefe
+                    
+                    break;
+                case 2://vendedor
+                    
+                    break;
+                case 3://ganha por peça
+                    
+                    break;
+                case 4://ganha por hora
+                    
+                    break;
+                default:
+                    break;
+            }
+        }
+        else JOptionPane.showMessageDialog(null, "Empregado nao existe");
     }//GEN-LAST:event_bGerarFolhaActionPerformed
 
+    /*info[0]=this.nome;
+    info[1]=this.cpf;
+    info[2]=this.rg;
+    info[3]=this.dataadmissao;
+    info[4]=this.cargo;
+    info[5]=this.funcao;
+    info[6]=String.valueOf(this.salariobase);
+    info[7]=String.valueOf(this.dependentes);*/
+    
     private void bMostrarInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMostrarInfoActionPerformed
         // TODO add your handling code here:
         int qual=Integer.parseInt(JOptionPane.showInputDialog("Digite o id do funcionario"));
-        System.err.println(qual);
+        String result="";
+        //System.err.println(qual);
         if(qual>=0 && Main.qtd>0){
             int auxcargo=Main.ids.get(qual).cargo;
             switch(auxcargo){
                 case 1:
-                    JOptionPane.showMessageDialog(null, Main.ids.get(qual).chefe.getDados()+"\nCargo: Chefe", "Dados", 1);
+                    for(int i=0;i<8;i++){
+                        switch(i){
+                            case 0:
+                                result+="Nome: ";
+                                break;
+                            case 1:
+                                result+="\nCPF: ";
+                                break;
+                            case 2:
+                                result+="\nRG: ";
+                                break;
+                            case 3:
+                                result+="\nData de admissão: ";
+                                break;
+                            case 4:
+                                result+="\nCargo: ";
+                                break;
+                            case 5:
+                                result+="\nFunção: ";
+                                break;
+                            case 6:
+                                result+="\nSalário base: ";
+                                break;
+                            case 7:
+                                result+="\nDepndentes: ";
+                                break;
+                            default:
+                                break;
+                        }
+                        result+=Main.ids.get(qual).chefe.getDados()[i];
+                    }
+                    JOptionPane.showMessageDialog(null, result);
                     break;
                 case 2:
-                    JOptionPane.showMessageDialog(null, Main.ids.get(qual).vendedor.getDados()+"\nCargo: Vendedor", "Dados", 1);
+                    for(int i=0;i<8;i++){
+                        switch(i){
+                            case 0:
+                                result+="Nome: ";
+                                break;
+                            case 1:
+                                result+="\nCPF: ";
+                                break;
+                            case 2:
+                                result+="\nRG: ";
+                                break;
+                            case 3:
+                                result+="\nData de admissão: ";
+                                break;
+                            case 4:
+                                result+="\nCargo: ";
+                                break;
+                            case 5:
+                                result+="\nFunção: ";
+                                break;
+                            case 6:
+                                result+="\nSalário base: ";
+                                break;
+                            case 7:
+                                result+="\nDepndentes: ";
+                                break;
+                            default:
+                                break;
+                        }
+                        result+=Main.ids.get(qual).vendedor.getDados()[i];
+                    }
+                    JOptionPane.showMessageDialog(null, result);
                     break;
                 case 3:
-                    JOptionPane.showMessageDialog(null, Main.ids.get(qual).porpeca.getDados()+"\nCargo: Ganha por peça", "Dados", 1);
+                    for(int i=0;i<8;i++){
+                        switch(i){
+                            case 0:
+                                result+="Nome: ";
+                                break;
+                            case 1:
+                                result+="\nCPF: ";
+                                break;
+                            case 2:
+                                result+="\nRG: ";
+                                break;
+                            case 3:
+                                result+="\nData de admissão: ";
+                                break;
+                            case 4:
+                                result+="\nCargo: ";
+                                break;
+                            case 5:
+                                result+="\nFunção: ";
+                                break;
+                            case 6:
+                                result+="\nSalário base: ";
+                                break;
+                            case 7:
+                                result+="\nDepndentes: ";
+                                break;
+                            default:
+                                break;
+                        }
+                        result+=Main.ids.get(qual).porpeca.getDados()[i];
+                    }
+                    JOptionPane.showMessageDialog(null, result);
                     break;
                 case 4:
-                    JOptionPane.showMessageDialog(null, Main.ids.get(qual).porhora.getDados()+"\nCargo: Ganha por hora", "Dados", 1);
+                    for(int i=0;i<8;i++){
+                        switch(i){
+                            case 0:
+                                result+="Nome: ";
+                                break;
+                            case 1:
+                                result+="\nCPF: ";
+                                break;
+                            case 2:
+                                result+="\nRG: ";
+                                break;
+                            case 3:
+                                result+="\nData de admissão: ";
+                                break;
+                            case 4:
+                                result+="\nCargo: ";
+                                break;
+                            case 5:
+                                result+="\nFunção: ";
+                                break;
+                            case 6:
+                                result+="\nSalário base: ";
+                                break;
+                            case 7:
+                                result+="\nDepndentes: ";
+                                break;
+                            default:
+                                break;
+                        }
+                        result+=Main.ids.get(qual).porhora.getDados()[i];
+                    }
+                    JOptionPane.showMessageDialog(null, result);
                     break;
                 default:
                     break;
