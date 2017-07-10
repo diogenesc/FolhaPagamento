@@ -223,9 +223,9 @@ public class Cadastro extends javax.swing.JFrame {
                 break;
         }
         if(ver==1){
+            Main.qtd++;
             Main.gravador();
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso. O id do funcionário é "+Main.qtd);
-            Main.qtd++;
             aux=null;
             aux=new ID();
             aux.chefe=new Chefe();

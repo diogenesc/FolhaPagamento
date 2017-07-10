@@ -148,6 +148,7 @@ public class Painel extends javax.swing.JFrame {
         int qual=Integer.parseInt(JOptionPane.showInputDialog("Digite o id do funcionario"));
         //System.err.println(qual);
         if(qual>=0 && Main.qtd>0){
+            Main.idaux=qual;
             int auxcargo=Main.ids.get(qual).cargo;
             switch(auxcargo){
                 case 1://chefe
@@ -165,6 +166,7 @@ public class Painel extends javax.swing.JFrame {
                 default:
                     break;
             }
+            Main.envia=1;
         }
         else JOptionPane.showMessageDialog(null, "Empregado nao existe");
     }//GEN-LAST:event_bGerarFolhaActionPerformed

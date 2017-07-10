@@ -24,7 +24,10 @@ public class Main implements Serializable {
     public static ArrayList<ID> ids=new ArrayList<ID>();
     public static ID aux=new ID();
     public static int qtd;
-    static Scanner in=new Scanner(System.in);
+    public static Scanner in=new Scanner(System.in);
+    
+    //Flag e id para acionar thread de envio de pdf
+    public static int idaux,envia;
     
     public static void inic(){
         aux.chefe=new Chefe();
@@ -34,6 +37,8 @@ public class Main implements Serializable {
         Vendedor.setPorvenda(10);
         PorPeca.setValorpeca(25);
         PorHora.setValorhora(7);
+        envia=0;
+        idaux=-1;
     }
     
     @SuppressWarnings({"ConvertToTryWithResources", "UseSpecificCatch"})
@@ -47,6 +52,7 @@ public class Main implements Serializable {
             ids=(ArrayList<ID>) oin.readObject();
             oin.close();
             fin.close();
+            System.out.println("leitura de ids");
         }catch (Exception ex){
             System.err.println("erro na leitura de ids");
         }
@@ -58,6 +64,7 @@ public class Main implements Serializable {
             qtd=(int) oin.readObject();
             oin.close();
             fin.close();
+            System.out.println("leitura de qtd");
         }catch (Exception ex){
             System.err.println("erro na leitura de qtd");
         }
@@ -74,7 +81,7 @@ public class Main implements Serializable {
             oos.flush();
             oos.close();
             fout.close();
-            System.err.println("gravação de ids");
+            System.out.println("gravação de ids");
         }catch (Exception ex){
             System.err.println("erro na gravação de ids");
         }
@@ -87,20 +94,23 @@ public class Main implements Serializable {
             oos.flush();
             oos.close();
             fout.close();
-            System.err.println("gravação de qtd");
+            System.out.println("gravação de qtd");
         }catch (Exception ex){
             System.err.println("erro na gravação de qtd");
         }
     }
-
-    public static void main(String[] args) {
+    
+    public static void main(String[] args) throws InterruptedException {
         //Empregado do tipo Chefe para teste
         //Chefe chefe=new Chefe("luis","0","0","0","0","0",5000,1);
         //System.out.println(chefe.CalcularGanhos());
-        int sucesso=0;
         inic();
-        leitor();
-        new Login().setVisible(true);
+        Thread threadpdf=new EnviaPdf();
+        threadpdf.start();
+        idaux=1;
+        envia=1;
+        //leitor();
+        //new Login().setVisible(true);
     }
     
 }
