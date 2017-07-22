@@ -1,59 +1,51 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package folhapagamento;
 
-import static folhapagamento.Main.envia;
-import static folhapagamento.Main.idaux;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
-import java.util.Scanner;
+import java.net.*;  
+import java.io.*;  
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-
-public class EnviaPdf extends Thread {
-    
-    public synchronized void envia() throws InterruptedException, FileNotFoundException, IOException{
-        while(true){
-            sleep(200);
-            if(envia==1){
-                System.out.println("Começando envio...");
-                //codigo de envio
-		File f = new File("pdf/"+ idaux +".pdf");
-		FileInputStream in = new FileInputStream(f);
-		Socket socket = new Socket("localhost", 12345);
-		OutputStream out = socket.getOutputStream();
-		OutputStreamWriter osw = new OutputStreamWriter(out);
-		BufferedWriter writer = new BufferedWriter(osw);
-		writer.write(f.getName() + "\n");
-		writer.flush();
-		int tamanho = 2048; // buffer de 4KB  
-                byte[] buffer = new byte[tamanho];  
-                int lidos = -1;  
-                while ((lidos = in.read(buffer, 0, tamanho)) != -1) {  
-                    out.write(buffer, 0, lidos);  
-                } 
-                System.out.println("enviou");
-                out.close();
-                out.flush();
-                envia=0;
-            }
-        }
-    }
-
-    @Override
-    public void run(){
+   
+public class EnviaPdf {  
+       
+    public static void envia() {  
+   
         try {
-            envia();
-        } catch (InterruptedException ex) {
-            
+            //Send file
+            try (Socket sock = new Socket("127.0.0.1", 13267)) {
+                //Send file
+                File myFile = new File("pdf/"+Main.idaux+".pdf");
+                byte[] mybytearray = new byte[(int) myFile.length()];
+                
+                FileInputStream fis = new FileInputStream(myFile);
+                BufferedInputStream bis = new BufferedInputStream(fis);
+                //bis.read(mybytearray, 0, mybytearray.length);
+                
+                DataInputStream dis = new DataInputStream(bis);
+                dis.readFully(mybytearray, 0, mybytearray.length);
+                
+                OutputStream os = sock.getOutputStream();
+                
+                //Sending file name and file size to the server
+                DataOutputStream dos = new DataOutputStream(os);
+                dos.writeUTF(myFile.getName());
+                dos.writeLong(mybytearray.length);
+                dos.write(mybytearray, 0, mybytearray.length);
+                dos.flush();
+                
+                //Sending file data to the server
+                os.write(mybytearray, 0, mybytearray.length);
+                os.flush();
+                
+                //Closing socket
+                os.close();
+                dos.close();
+            }
         } catch (IOException ex) {
             Logger.getLogger(EnviaPdf.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
+    }  
 }

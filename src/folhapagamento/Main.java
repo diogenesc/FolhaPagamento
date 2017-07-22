@@ -3,6 +3,7 @@ package folhapagamento;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -100,17 +101,13 @@ public class Main implements Serializable {
         }
     }
     
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         //Empregado do tipo Chefe para teste
         //Chefe chefe=new Chefe("luis","0","0","0","0","0",5000,1);
         //System.out.println(chefe.CalcularGanhos());
         inic();
-        Thread threadpdf=new EnviaPdf();
-        threadpdf.start();
-        idaux=1;
-        envia=1;
-        //leitor();
-        //new Login().setVisible(true);
+        leitor();
+        new Login().setVisible(true);
     }
     
 }

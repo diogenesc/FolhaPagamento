@@ -5,6 +5,9 @@
  */
 package folhapagamento;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -152,23 +155,30 @@ public class Painel extends javax.swing.JFrame {
             int auxcargo=Main.ids.get(qual).cargo;
             switch(auxcargo){
                 case 1://chefe
-                    
+                    //Criando o pdf
+                    Pdf docChefe = new Pdf(qual,Main.ids.get(qual).chefe.nome,Main.ids.get(qual).chefe.cpf,Main.ids.get(qual).chefe.rg,Main.ids.get(qual).chefe.funcao,Main.ids.get(qual).chefe.cargo,Main.ids.get(qual).chefe.salariobase);
                     break;
                 case 2://vendedor
-                    
+                    Pdf docVendedor = new Pdf(qual,Main.ids.get(qual).vendedor.nome,Main.ids.get(qual).vendedor.cpf,Main.ids.get(qual).vendedor.rg,Main.ids.get(qual).vendedor.funcao,Main.ids.get(qual).vendedor.cargo,Main.ids.get(qual).vendedor.salariobase);
                     break;
                 case 3://ganha por peça
-                    
+                    Pdf docPorPeca = new Pdf(qual,Main.ids.get(qual).porpeca.nome,Main.ids.get(qual).porpeca.cpf,Main.ids.get(qual).porpeca.rg,Main.ids.get(qual).porpeca.funcao,Main.ids.get(qual).porpeca.cargo,Main.ids.get(qual).porpeca.salariobase);
                     break;
                 case 4://ganha por hora
-                    
+                    Pdf docPorHora = new Pdf(qual,Main.ids.get(qual).porhora.nome,Main.ids.get(qual).porhora.cpf,Main.ids.get(qual).porhora.rg,Main.ids.get(qual).porhora.funcao,Main.ids.get(qual).porhora.cargo,Main.ids.get(qual).porhora.salariobase);
                     break;
                 default:
                     break;
             }
             Main.envia=1;
+            EnviaPdf threadpdf=new EnviaPdf();
+            try {
+                threadpdf.envia();
+            } catch (IOException ex) {
+                Logger.getLogger(Painel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        else JOptionPane.showMessageDialog(null, "Empregado nao existe");
+        else JOptionPane.showMessageDialog(null, "Empregado não existe");
     }//GEN-LAST:event_bGerarFolhaActionPerformed
 
     /*info[0]=this.nome;
